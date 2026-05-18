@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(UniversalInputSystem))]

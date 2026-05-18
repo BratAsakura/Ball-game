@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private Jumper _jumper;
     private IInputSystem _inputSystem;
 
-
     private void Awake()
     {
         _movable = GetComponent<Movement>();

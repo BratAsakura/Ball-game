@@ -13,9 +13,12 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
     private void Awake()
     {
         _gameInput = new GameInput();
-        _gameInput.Player.Move.performed += OnMove;
+        _gameInput.Player.Move.performed += OnMovePerformed;
+        _gameInput.Player.Move.canceled += OnMoveCanceled;
         _gameInput.Player.Jump.performed += OnJump;
     }
+
+
 
     private void OnEnable()
     {
@@ -29,7 +32,8 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
 
     private void OnDestroy()
     {
-        _gameInput.Player.Move.performed -= OnMove;
+        _gameInput.Player.Move.performed -= OnMovePerformed;
+        _gameInput.Player.Move.canceled -= OnMoveCanceled;
         _gameInput.Player.Jump.performed -= OnJump;
     }
 
@@ -43,7 +47,12 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
         Jumping?.Invoke();
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        _currentDirection = Vector2.zero;
+    }
+
+    private void OnMovePerformed(InputAction.CallbackContext context)
     {
         _currentDirection = context.ReadValue<Vector2>();
     }

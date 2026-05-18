@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Jumper))]
 public class PlayerMovement : MonoBehaviour
 {
-    private Movement _movable;
-    private Jumper _jumper;
+    private IMovable _movable;
+    private ICanJump _jumper;
     private IInputSystem _inputSystem;
 
     private void Awake()
@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_inputSystem == null) return;
+
         _inputSystem.Moving -= OnMoving;
         _inputSystem.Jumping -= OnJumping;
     }

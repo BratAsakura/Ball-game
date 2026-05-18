@@ -18,8 +18,6 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
         _gameInput.Player.Jump.performed += OnJump;
     }
 
-
-
     private void OnEnable()
     {
         _gameInput.Enable();

@@ -15,10 +15,9 @@ public class Trap : MonoBehaviour
         if (collision.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
             Damage(damageable);
 
-        float directionX = Mathf.Sign(collision.transform.position.x - transform.position.x);
-        Vector2 direction = new Vector2(directionX, 0f);
-
+        Vector2 direction = (collision.transform.position - transform.forward).normalized;
         collision.rigidbody.linearVelocity = Vector2.zero;
+
         collision.rigidbody.AddForce(
             direction * _force,
             ForceMode2D.Impulse);

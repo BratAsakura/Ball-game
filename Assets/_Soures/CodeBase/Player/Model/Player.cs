@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -9,9 +10,14 @@ public class Player : MonoBehaviour, IDamageable
     private PlayerMovement _movement;
     private IInputSystem _input;
 
+    public event Action<int> HealthChanged;
+
+    public int Health => _health;
+
     public void TakeDamage()
     {
         _health--;
+        HealthChanged?.Invoke(Health);
     }
 
     private void Awake()

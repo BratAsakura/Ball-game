@@ -27,10 +27,10 @@ public class UISystem : MonoBehaviour
     private void OnDisable()
     {
         if (_player != null)
-            _player.HealthChanged -= OnScoreChange;
+            _player.HealthChanged -= OnHealthChange;
 
         if (_scoreManager != null)
-            _scoreManager.ScoreChange -= OnHealthChange;
+            _scoreManager.ScoreChange -= OnScoreChange;
     }
 
     private void OnScoreChange(int value)

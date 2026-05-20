@@ -16,7 +16,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage()
     {
-        _health--;
+        _health = Math.Max(0, _health - 1);
         HealthChanged?.Invoke(Health);
     }
 

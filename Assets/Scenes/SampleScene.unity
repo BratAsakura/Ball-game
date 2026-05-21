@@ -2757,7 +2757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Jumper
   _jumpForce: 6
   _jumpCount: 1
-  _feets: {fileID: 846625525}
+  _feet: {fileID: 846625525}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

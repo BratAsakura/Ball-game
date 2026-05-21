@@ -18,6 +18,9 @@ public class Player : MonoBehaviour, IDamageable, IHealthProvider
     {
         _health = Math.Max(0, _health - 1);
         HealthChanged?.Invoke(Health);
+
+        if (_health == 0)
+            Destroy(gameObject);
     }
 
     private void Awake()

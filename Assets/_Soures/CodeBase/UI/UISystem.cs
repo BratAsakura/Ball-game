@@ -3,34 +3,43 @@ using UnityEngine;
 
 public class UISystem : MonoBehaviour
 {
-    [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private TextMeshProUGUI _scoreView;
-    [SerializeField] private Player _player;
     [SerializeField] private TextMeshProUGUI _healthView;
+    [SerializeField] private MonoBehaviour _scoreProvider;
+    [SerializeField] private MonoBehaviour _healthProvider;
 
-    private void Start()
+    private IScoreProvider _scoreProviderInterface;
+    private IHealthProvider _healthProviderInterface;
+
+    private void Awake()
     {
-        _healthView.SetText($"Health: {_player.Health}");
+        _scoreProviderInterface = (IScoreProvider)_scoreProvider;
+        _healthProviderInterface = (IHealthProvider)_healthProvider;
     }
 
     private void OnEnable()
     {
-        _scoreManager.ScoreChange += OnScoreChange;
-        _player.HealthChanged += OnHealthChange;
+        _scoreProviderInterface.ScoreChange += OnScoreChange;
+        _healthProviderInterface.HealthChanged += OnHealthChange;
+    }
+
+    private void Start()
+    {
+        _healthView.SetText($"Health: {_healthProviderInterface.Health}");
+    }
+
+    private void OnDisable()
+    {
+        if (_healthProviderInterface != null)
+            _healthProviderInterface.HealthChanged -= OnHealthChange;
+
+        if (_scoreProviderInterface != null)
+            _scoreProviderInterface.ScoreChange -= OnScoreChange;
     }
 
     private void OnHealthChange(int value)
     {
         _healthView.SetText($"Health: {value}");
-    }
-
-    private void OnDisable()
-    {
-        if (_player != null)
-            _player.HealthChanged -= OnHealthChange;
-
-        if (_scoreManager != null)
-            _scoreManager.ScoreChange -= OnScoreChange;
     }
 
     private void OnScoreChange(int value)

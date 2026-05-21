@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour, IScoreProvider
 {
     [SerializeField] private Coin[] _coins;
 

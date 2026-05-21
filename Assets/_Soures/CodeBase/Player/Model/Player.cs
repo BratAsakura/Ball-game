@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(UniversalInputSystem))]
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable, IHealthProvider
 {
     [SerializeField] private int _health = 3;
 

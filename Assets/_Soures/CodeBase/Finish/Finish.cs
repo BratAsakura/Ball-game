@@ -1,20 +1,16 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class Finish : MonoBehaviour
+public class Finish : MonoBehaviour, IFinishProvider
 {
-    [SerializeField] private GameObject _window;
-
-    private void Awake()
-    {
-        _window.SetActive(false);
-    }
+    public event Action OnFinished;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player"))
             return;
 
-        _window.SetActive(true);
+        OnFinished?.Invoke();
     }
 }

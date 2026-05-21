@@ -23,6 +23,11 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
         _gameInput.Enable();
     }
 
+    private void FixedUpdate()
+    {
+        Moving?.Invoke(_currentDirection.x);
+    }
+
     private void OnDisable()
     {
         _gameInput.Disable();
@@ -33,11 +38,6 @@ public class UniversalInputSystem : MonoBehaviour, IInputSystem
         _gameInput.Player.Move.performed -= OnMovePerformed;
         _gameInput.Player.Move.canceled -= OnMoveCanceled;
         _gameInput.Player.Jump.performed -= OnJump;
-    }
-
-    private void FixedUpdate()
-    {
-        Moving?.Invoke(_currentDirection.x);
     }
 
     private void OnJump(InputAction.CallbackContext context)

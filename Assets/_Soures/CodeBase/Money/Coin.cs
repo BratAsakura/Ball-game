@@ -12,11 +12,8 @@ public class Coin : MonoBehaviour
         if (!collision.CompareTag("Player"))
             return;
 
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         Collection?.Invoke(_score);
+
+        Destroy(gameObject);
     }
 }

@@ -7,7 +7,7 @@ public class Jumper : MonoBehaviour, ICanJump
 
     [SerializeField] private float _jumpForce = 3;
     [SerializeField] private int _jumpCount = DefaultJumpingCount;
-    [SerializeField] private Transform _feets;
+    [SerializeField] private Transform _feet;
     [SerializeField] private LayerMask _groundLayer;
 
     private Rigidbody2D _rigidbody;
@@ -17,7 +17,7 @@ public class Jumper : MonoBehaviour, ICanJump
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (IsGrounded() == true)
             _jumpCount = DefaultJumpingCount;
@@ -25,7 +25,7 @@ public class Jumper : MonoBehaviour, ICanJump
 
     public bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_feets.position, Vector2.down, 0.1f, _groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(_feet.position, Vector2.down, 0.1f, _groundLayer);
         return hit.collider != null;
     }
 

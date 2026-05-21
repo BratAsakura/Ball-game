@@ -19,6 +19,6 @@ public class Movement : MonoBehaviour, IMovable
 
     public void StopMove()
     {
-        _rigidbody.linearVelocity = new Vector2(0f * _speed, _rigidbody.linearVelocity.y);
+        _rigidbody.linearVelocity = new Vector2(0f, _rigidbody.linearVelocity.y);
     }
 }

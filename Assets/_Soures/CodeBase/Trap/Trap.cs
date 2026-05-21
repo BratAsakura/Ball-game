@@ -18,10 +18,7 @@ public class Trap : MonoBehaviour
         Vector2 direction = (collision.transform.position - transform.forward).normalized;
         collision.rigidbody.linearVelocity = Vector2.zero;
 
-        collision.rigidbody.AddForce(
-            direction * _force,
-            ForceMode2D.Impulse);
-
+        collision.rigidbody.AddForce(direction * _force, ForceMode2D.Impulse);
     }
 
     private void Damage(IDamageable target)

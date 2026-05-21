@@ -14,15 +14,6 @@ public class Player : MonoBehaviour, IDamageable, IHealthProvider
 
     public int Health => _health;
 
-    public void TakeDamage()
-    {
-        _health = Math.Max(0, _health - 1);
-        HealthChanged?.Invoke(Health);
-
-        if (_health == 0)
-            Destroy(gameObject);
-    }
-
     private void Awake()
     {
         _input = GetComponent<IInputSystem>();
@@ -32,5 +23,14 @@ public class Player : MonoBehaviour, IDamageable, IHealthProvider
     private void OnEnable()
     {
         _movement.SetInput(_input);
+    }
+
+    public void TakeDamage()
+    {
+        _health = Math.Max(0, _health - 1);
+        HealthChanged?.Invoke(Health);
+
+        if (_health == 0)
+            Destroy(gameObject);
     }
 }
